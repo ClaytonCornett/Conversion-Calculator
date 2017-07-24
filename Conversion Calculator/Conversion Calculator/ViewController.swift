@@ -27,6 +27,22 @@ class ViewController: UIViewController {
         inputTextField.text = inputTextField.text! + String(sender.tag-1)
     }
     
+    var count = 0
+    @IBAction func addDecimal(_ sender: UIButton) {
+        
+        if count == 0{
+        inputTextField.text = inputTextField.text! + "."
+            count = 1
+        }
+        
+        
+        
+    }
+    @IBAction func clearButton(_ sender: UIButton) {
+        
+        inputTextField.text = ""
+        count = 0
+    }
     var isOn = false
 
     @IBAction func plusminusChange(_ sender: UIButton) {
