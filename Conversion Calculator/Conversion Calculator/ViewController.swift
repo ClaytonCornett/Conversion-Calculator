@@ -13,26 +13,55 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var outputTextField: UITextField!
     @IBOutlet weak var inputTextField: UITextField!
+    
+    var choice: Int = 1
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        inputTextField.text = inputs[choice-1]
+        outputTextField.text = outputs[choice-1]
         // Do any additional setup after loading the view, typically from a nib.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+        
     }
+    
+
+    var numbers: String = ""
+    var unit: String = ""
+    
+    var inputs = ["Miles", "Kilometers", "Farenheight", "Celcius"]
+    var outputs = ["Kilometers", "Miles", "Celcius", "Farenheight"]
+
 
     @IBAction func addNumber(_ sender: UIButton) {
+      
+
         
-        inputTextField.text = inputTextField.text! + String(sender.tag-1)
+        numbers = numbers + String(sender.tag-1)
+        unit = inputs[choice-1]
+    
+        inputTextField.text = numbers + " " + unit
+        
+        switch choice {
+        case 1:
+            self.outputTextField.text = self.milesToKilometers(numbers)
+        default:
+            self.outputTextField.text = "default"
+        }
     }
     
     var count = 0
     @IBAction func addDecimal(_ sender: UIButton) {
         
         if count == 0{
-        inputTextField.text = inputTextField.text! + "."
+        numbers = numbers + "."
+            inputTextField.text = numbers + " " + unit
             count = 1
         }
         
@@ -41,27 +70,47 @@ class ViewController: UIViewController {
     }
     @IBAction func clearButton(_ sender: UIButton) {
         
+        numbers = ""
         inputTextField.text = ""
+        outputTextField.text = ""
         count = 0
     }
     
 
     @IBAction func plusminusChange(_ sender: UIButton) {
         
+        if numbers == ""{
+            return
+        }
+        
+        if numbers == "." {
+            return
+        }
+        
         var new: Double
         
-        if let check = Double(inputTextField.text!),
+        if let check = Double(numbers),
             check < 0{
             
             new = abs(check)
-            inputTextField.text = String(new)
+            numbers = String(new)
             
         }
         
         
             else{
-                inputTextField.text = "-" + inputTextField.text!
+                numbers = "-" + numbers
         }
+        
+        inputTextField.text = numbers + " " + unit
+        
+        switch choice {
+        case 1:
+            self.outputTextField.text = self.milesToKilometers(numbers)
+        default:
+            self.outputTextField.text = "default"
+        }
+
     }
     
     
@@ -84,8 +133,9 @@ class ViewController: UIViewController {
             (alertAction) -> Void in
             
             
-            
-            self.outputTextField.text = self.milesToKilometers(self.inputTextField.text!)
+            self.choice = 1
+            self.outputTextField.text = self.milesToKilometers(self.numbers)
+
             
             
         }))
