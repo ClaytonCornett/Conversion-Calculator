@@ -11,6 +11,7 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var outputTextField: UITextField!
     @IBOutlet weak var inputTextField: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,6 +64,34 @@ class ViewController: UIViewController {
         }
     }
     
+    
+    func milesToKilometers(_ miles: String) -> String {
+        
+        let new: Double = Double(miles)!
+        let multiplier: Double = 1.6
+        
+        let total = new * multiplier
+        
+        return String(total) + " Kilometers"
+        
+    }
+    
+    
+    @IBAction func converterButton(_ sender: AnyObject) {
+        
+        let alert = UIAlertController(title: "Choose a Converter", message: "", preferredStyle: UIAlertControllerStyle.actionSheet)
+        alert.addAction(UIAlertAction(title: "Miles to Kilometers", style: UIAlertActionStyle.default, handler: {
+            (alertAction) -> Void in
+            
+            
+            
+            self.outputTextField.text = self.milesToKilometers(self.inputTextField.text!)
+            
+            
+        }))
+        
+        self.present(alert, animated: true, completion: nil)
+    }
     
 }
 
