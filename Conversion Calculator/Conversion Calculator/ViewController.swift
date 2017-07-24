@@ -43,18 +43,26 @@ class ViewController: UIViewController {
         inputTextField.text = ""
         count = 0
     }
-    var isOn = false
+    
 
     @IBAction func plusminusChange(_ sender: UIButton) {
         
-            if isOn == true {
-  //              String(dropFirst(inputTextField.text))
-                
+        var new: Double
+        
+        if let check = Double(inputTextField.text!),
+            check < 0{
+            
+            new = abs(check)
+            inputTextField.text = String(new)
+            
         }
+        
         
             else{
                 inputTextField.text = "-" + inputTextField.text!
         }
     }
+    
+    
 }
 
