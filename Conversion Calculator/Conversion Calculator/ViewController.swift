@@ -51,6 +51,12 @@ class ViewController: UIViewController {
         switch choice {
         case 1:
             self.outputTextField.text = self.milesToKilometers(numbers)
+        case 2:
+            self.outputTextField.text = self.kilometersToMiles(numbers)
+        case 3:
+            self.outputTextField.text = self.fToC(numbers)
+        case 4:
+            self.outputTextField.text = self.cToF(numbers)
         default:
             self.outputTextField.text = "default"
         }
@@ -59,9 +65,9 @@ class ViewController: UIViewController {
     var count = 0
     @IBAction func addDecimal(_ sender: UIButton) {
         
-        if count == 0{
+        if count == 0 {
         numbers = numbers + "."
-            inputTextField.text = numbers + " " + unit
+            inputTextField.text = numbers + " " + inputs[choice-1]
             count = 1
         }
         
@@ -71,8 +77,8 @@ class ViewController: UIViewController {
     @IBAction func clearButton(_ sender: UIButton) {
         
         numbers = ""
-        inputTextField.text = ""
-        outputTextField.text = ""
+        inputTextField.text = inputs[choice-1]
+        outputTextField.text = outputs[choice-1]
         count = 0
     }
     
@@ -94,6 +100,7 @@ class ViewController: UIViewController {
             
             new = abs(check)
             numbers = String(new)
+            count = 1
             
         }
         
@@ -107,6 +114,12 @@ class ViewController: UIViewController {
         switch choice {
         case 1:
             self.outputTextField.text = self.milesToKilometers(numbers)
+        case 2:
+            self.outputTextField.text = self.kilometersToMiles(numbers)
+        case 3:
+            self.outputTextField.text = self.fToC(numbers)
+        case 4:
+            self.outputTextField.text = self.cToF(numbers)
         default:
             self.outputTextField.text = "default"
         }
@@ -117,7 +130,7 @@ class ViewController: UIViewController {
     func milesToKilometers(_ miles: String) -> String {
         
         let new: Double = Double(miles)!
-        let multiplier: Double = 1.6
+        let multiplier: Double = 1.60934
         
         let total = new * multiplier
         
@@ -125,6 +138,38 @@ class ViewController: UIViewController {
         
     }
     
+    func kilometersToMiles(_ kilometers: String) -> String {
+        
+        let new: Double = Double(kilometers)!
+        let multiplier: Double = 0.621371
+        
+        let total = new * multiplier
+        
+        return String(total) + " Miles"
+        
+    }
+    
+    
+    func fToC(_ ferenheight: String) -> String {
+        
+        let new: Double = Double(ferenheight)!
+        
+        let total = (new - 32) * (5/9)
+        
+        return String(total) + " Celcius"
+        
+    }
+    
+    
+    func cToF(_ celcius: String) -> String {
+        
+        let new: Double = Double(celcius)!
+        
+        let total = new * (9/5) + 32
+        
+        return String(total) + " Ferenheight"
+        
+    }
     
     @IBAction func converterButton(_ sender: AnyObject) {
         
@@ -134,8 +179,65 @@ class ViewController: UIViewController {
             
             
             self.choice = 1
+            
+                self.inputTextField.text = self.numbers + " " + self.inputs[self.choice-1]
+            if self.numbers != ""{
             self.outputTextField.text = self.milesToKilometers(self.numbers)
-
+            }
+            else{
+                self.outputTextField.text = self.outputs[self.choice-1]
+            }
+            
+            
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Kilometers to Miles", style: UIAlertActionStyle.default, handler: {
+            (alertAction) -> Void in
+            
+            
+            self.choice = 2
+            
+                self.inputTextField.text = self.numbers + " " + self.inputs[self.choice-1]
+            if self.numbers != ""{
+                self.outputTextField.text = self.kilometersToMiles(self.numbers)
+            }
+            else{
+                self.outputTextField.text = self.outputs[self.choice-1]
+            }
+            
+            
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Ferenheight to Celcius", style: UIAlertActionStyle.default, handler: {
+            (alertAction) -> Void in
+            
+            
+            self.choice = 3
+            
+            self.inputTextField.text = self.numbers + " " + self.inputs[self.choice-1]
+            if self.numbers != ""{
+                self.outputTextField.text = self.fToC(self.numbers)
+            }
+            else{
+                self.outputTextField.text = self.outputs[self.choice-1]
+            }
+            
+            
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Celcius to Ferenheight", style: UIAlertActionStyle.default, handler: {
+            (alertAction) -> Void in
+            
+            
+            self.choice = 4
+            
+            self.inputTextField.text = self.numbers + " " + self.inputs[self.choice-1]
+            if self.numbers != ""{
+                self.outputTextField.text = self.cToF(self.numbers)
+            }
+            else{
+                self.outputTextField.text = self.outputs[self.choice-1]
+            }
             
             
         }))
