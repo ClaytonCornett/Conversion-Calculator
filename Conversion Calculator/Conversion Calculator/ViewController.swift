@@ -35,8 +35,8 @@ class ViewController: UIViewController {
     var numbers: String = ""
     var unit: String = ""
     
-    var inputs = ["Miles", "Kilometers", "Farenheight", "Celcius"]
-    var outputs = ["Kilometers", "Miles", "Celcius", "Farenheight"]
+    var inputs = ["mi", "km", "\u{00B0}F", "\u{00B0}C"]
+    var outputs = ["km", "mi", "\u{00B0}C", "\u{00B0}F"]
 
 
     @IBAction func addNumber(_ sender: UIButton) {
@@ -130,22 +130,22 @@ class ViewController: UIViewController {
     func milesToKilometers(_ miles: String) -> String {
         
         let new: Double = Double(miles)!
-        let multiplier: Double = 1.60934
+        let multiplier: Double = 1.61
         
         let total = new * multiplier
         
-        return String(round((total*100)/100)) + " Kilometers"
+        return String(total) + " km"
         
     }
     
     func kilometersToMiles(_ kilometers: String) -> String {
         
         let new: Double = Double(kilometers)!
-        let multiplier: Double = 0.621371
+        let multiplier: Double = 0.62
         
         let total = new * multiplier
         
-        return String(round((total*100)/100)) + " Miles"
+        return String(total) + " mi"
         
     }
     
@@ -156,7 +156,8 @@ class ViewController: UIViewController {
         
         let total = (new - 32) * (5/9)
         
-        return String(round(100*total)/100) + " Celcius"
+        //return String(round(100*total)/100) + " \u{00B0}C"
+        return String(format: "%.2f", total ) + " \u{00b0}C"
         
     }
     
@@ -167,7 +168,8 @@ class ViewController: UIViewController {
         
         let total = new * (9/5) + 32
         
-        return String(round((total*100)/100)) + " Ferenheight"
+        //return String(round((total*100)/100)) + " \u{00B0}F"
+        return String(format: "%.2f", total ) + " \u{00b0}F"
         
     }
     
