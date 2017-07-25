@@ -134,7 +134,7 @@ class ViewController: UIViewController {
         
         let total = new * multiplier
         
-        return String(total) + " Kilometers"
+        return String(round((total*100)/100)) + " Kilometers"
         
     }
     
@@ -145,7 +145,7 @@ class ViewController: UIViewController {
         
         let total = new * multiplier
         
-        return String(total) + " Miles"
+        return String(round((total*100)/100)) + " Miles"
         
     }
     
@@ -156,7 +156,7 @@ class ViewController: UIViewController {
         
         let total = (new - 32) * (5/9)
         
-        return String(total) + " Celcius"
+        return String(round(100*total)/100) + " Celcius"
         
     }
     
@@ -167,7 +167,7 @@ class ViewController: UIViewController {
         
         let total = new * (9/5) + 32
         
-        return String(total) + " Ferenheight"
+        return String(round((total*100)/100)) + " Ferenheight"
         
     }
     
