@@ -46,7 +46,7 @@ class ViewController: UIViewController {
         numbers = numbers + String(sender.tag-1)
         unit = inputs[choice-1]
     
-        inputTextField.text = numbers + " " + unit
+        inputTextField.text = numbers + " " + inputs[choice-1]
         
         switch choice {
         case 1:
@@ -109,7 +109,7 @@ class ViewController: UIViewController {
                 numbers = "-" + numbers
         }
         
-        inputTextField.text = numbers + " " + unit
+        inputTextField.text = numbers + " " + inputs[choice-1]
         
         switch choice {
         case 1:
@@ -247,5 +247,8 @@ class ViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
+    
 }
+
+
 
